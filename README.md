@@ -1,8 +1,8 @@
 # 🚀 Extensão do Chrome - Bootcamp II
 
 ![Status](https://img.shields.io/badge/status-em%20desenvolvimento-yellow?style=for-the-badge)
-![Última atualização](https://img.shields.io/github/last-commit/Rafa-rina/bootcamp2-chrome-ext-rafael?style=for-the-badge)
-![Licença](https://img.shields.io/github/license/Rafa-rina/bootcamp2-chrome-ext-rafael?style=for-the-badge)
+![Última atualização](https://img.shields.io/badge/última%20atualização-10%2F09-blue?style=for-the-badge)
+![Licença](https://img.shields.io/badge/licença-MIT-green?style=for-the-badge)
 
 Projeto desenvolvido para o **Bootcamp II** com o objetivo de criar uma **extensão do Google Chrome** utilizando **Manifest V3**, HTML, CSS e JavaScript.  
 O foco está em entender as APIs do Chrome, o empacotamento e a publicação no GitHub Pages.
