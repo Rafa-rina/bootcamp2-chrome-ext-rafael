@@ -1,0 +1,5 @@
+.container { width:260px; font-family: Inter, Arial, sans-serif; padding:12px; }
+h1 { font-size:18px; margin:4px 0 8px 0; }
+.controls { display:flex; gap:8px; margin-bottom:8px; }
+button { padding:8px 10px; border-radius:6px; border:1px solid #ccc; background:#fff; cursor:pointer; }
+pre { background:#f6f6f6; padding:8px; border-radius:6px; font-size:12px; white-space:pre-wrap; }
