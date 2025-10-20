@@ -1,27 +1,20 @@
-<!doctype html>
-<html lang="pt-BR">
-<head>
-  <meta charset="utf-8" />
-  <meta http-equiv="Content-Security-Policy" content="script-src 'self'; object-src 'self'">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Bootcamp Helper</title>
-  <link rel="stylesheet" href="../styles/global.css">
-  <link rel="stylesheet" href="popup.css">
-</head>
-<body>
-  <div class="container">
-    <h1>Bootcamp Helper</h1>
-    <p>Versão: <strong>1.0.0</strong></p>
-
-    <div class="controls">
-      <button id="ping">Ping background</button>
-      <button id="showStorage">Mostrar storage</button>
-    </div>
-
-    <pre id="status">status: —</pre>
-  </div>
-
-  <!-- script externo (obrigatório por CSP) -->
-  <script src="popup.js"></script>
-</body>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Popup</title>
+    <style>
+      body {
+        width: 200px;
+        height: 100px;
+        font-family: Arial, sans-serif;
+        text-align: center;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>Olá!</h3>
+    <p>Extensão carregada 🎉</p>
+    <script src="popup.js"></script>
+  </body>
 </html>

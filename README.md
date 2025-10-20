@@ -18,3 +18,15 @@ Projeto do Bootcamp II: extensão Chrome (Manifest V3) com popup, service worker
 
 ## Licença
 MIT
+
+# Testando commit e push
+# my-chrome-extension
+
+Como rodar:
+1. npm ci
+2. npm run build
+3. npm run test:e2e
+
+Rodar via Docker:
+docker compose build
+docker compose run --rm e2e

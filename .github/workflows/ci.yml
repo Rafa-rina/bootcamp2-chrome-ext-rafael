@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      create_release:
+        description: 'Criar release (true/false)'
+        required: false
+        default: 'false'
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Instalando dependências
+        run: npm ci
+      - name: Instalar Playwright
+        run: npx playwright install --with-deps chromium
+      - name: Build da extensão
+        run: npm run build
+      - name: Run E2E (Playwright)
+        run: |
+          set -o pipefail
+          npm run test:e2e || true
+      - name: Upload Playwright report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: playwright-report
+      - name: Upload extension zip
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: extension-zip
+          path: dist/extension.zip
+
+  release:
+    needs: test-build
+    runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'push' && startsWith(github.ref, 'refs/tags/') ||
+      github.event_name == 'workflow_dispatch' && github.event.inputs.create_release == 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Instalar deps e build
+        run: |
+          npm ci
+          npm run build
+      - name: Create GitHub Release
+        id: create_release
+        uses: actions/create-release@v1
+        with:
+          tag_name: ${{ github.ref_name == '' && format('manual-{0}', github.run_id) || github.ref_name }}
+          release_name: Release ${{ github.ref_name || github.run_id }}
+          body: Release gerada pela pipeline
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload extension.zip to release
+        uses: actions/upload-release-asset@v1
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: dist/extension.zip
+          asset_name: extension.zip
+          asset_content_type: application/zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

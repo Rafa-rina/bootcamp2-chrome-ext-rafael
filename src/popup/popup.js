@@ -16,3 +16,5 @@ showStorageBtn.addEventListener('click', async () => {
     status.textContent = `Storage: ${JSON.stringify(items, null, 2)}`;
   });
 });
+
+console.log("Popup carregado!");
